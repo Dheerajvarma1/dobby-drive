@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "dobby-drive": {
+      "command": "node",
+      "args": ["d:\\work\\internshala\\Dobby Ads\\backend\\mcp-server.mjs"],
+      "env": {
+        "MONGO_URI": "mongodb://127.0.0.1:27017/dobby-drive"
+      }
+    }
+  }
+}
