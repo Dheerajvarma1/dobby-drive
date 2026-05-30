@@ -4,6 +4,8 @@
 
 > A secure, full-stack image storage and folder management web application - built with React, Node.js, and MongoDB. Organize your images into nested folders, track storage usage in real time, and control access to your own content. Ships with an MCP server that exposes core actions as AI-callable tools.
 
+🚀 **Live Demo**: [https://dobby-drive-ivory.vercel.app/](https://dobby-drive-ivory.vercel.app/)
+
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-8.0-47A248?style=flat-square&logo=mongodb&logoColor=white)
