@@ -37,3 +37,13 @@ Thumbs.db
 *.sln
 *.sw?
 .gemini/
+
+# Local script files with hardcoded paths
+screenshot*.mjs
+mcp-*.mjs
+upload-*.mjs
+mcp-upload-short.mjs
+
+# Temporary JSON files created by scripts
+temp_*.json
+mcp_*.json

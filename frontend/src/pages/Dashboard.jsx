@@ -52,6 +52,9 @@ export default function Dashboard({ onShowToast }) {
   const storagePct   = Math.min(100, (storageUsed / MAX_STORAGE) * 100);
   const totalItems   = folders.length + images.length;
   const isMcpUser    = user?.username === 'mcp_user';
+  
+  // Check if content was created by MCP user (for AI badge)
+  const isMcpContent = (item) => item?.ownerUsername === 'mcp_user';
 
   // ── handlers ──────────────────────────────────────────────
 
@@ -346,7 +349,7 @@ export default function Dashboard({ onShowToast }) {
                             <div className="folder-name" style={{ margin: 0, flex: 1, minWidth: 0 }}>
                               {f.name}
                             </div>
-                            {isMcpUser && <span className="mcp-item-badge" style={{ margin: 0, flexShrink: 0 }}>AI</span>}
+                            {isMcpContent(f) && <span className="mcp-item-badge" style={{ margin: 0, flexShrink: 0 }}>AI</span>}
                           </div>
                           <div className="folder-size">{fmt(f.size || 0)}</div>
                           {confirmDelete?.id === f._id && (
@@ -375,7 +378,7 @@ export default function Dashboard({ onShowToast }) {
                           <div className="list-cell-name">
                             <Folder size={15} style={{ color: '#000000', flexShrink: 0 }} />
                             <span>{f.name}</span>
-                            {isMcpUser && <span className="mcp-item-badge">AI</span>}
+                            {isMcpContent(f) && <span className="mcp-item-badge">AI</span>}
                           </div>
                           <div className="list-cell-size">{fmt(f.size || 0)}</div>
                           <div className="list-cell-date">{fmtDate(f.createdAt)}</div>
@@ -425,7 +428,7 @@ export default function Dashboard({ onShowToast }) {
                             <div className="image-meta">
                               <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 2, minWidth: 0, width: '100%' }}>
                                 <div className="image-name" style={{ margin: 0, flex: 1, minWidth: 0 }}>{img.name}</div>
-                                {isMcpUser && <span className="mcp-item-badge" style={{ flexShrink: 0, margin: 0 }}>AI</span>}
+                                {isMcpContent(img) && <span className="mcp-item-badge" style={{ flexShrink: 0, margin: 0 }}>AI</span>}
                               </div>
                               <div className="image-sz">{fmt(img.size)}</div>
                             </div>
@@ -464,7 +467,7 @@ export default function Dashboard({ onShowToast }) {
                           <div className="list-cell-name">
                             <FileImage size={15} style={{ color: 'rgba(0,0,0,0.35)', flexShrink: 0 }} />
                             <span>{img.name}</span>
-                            {isMcpUser && <span className="mcp-item-badge">AI</span>}
+                            {isMcpContent(img) && <span className="mcp-item-badge">AI</span>}
                           </div>
                           <div className="list-cell-size">{fmt(img.size)}</div>
                           <div className="list-cell-date">{fmtDate(img.createdAt)}</div>

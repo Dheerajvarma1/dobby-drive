@@ -98,6 +98,10 @@ const getFolderContents = async (req, res) => {
     // Get subfolders in this directory
     const folders = await Folder.find({ parent: folderId, owner: req.user._id }).sort({ createdAt: -1 });
 
+    // Get MCP user for badge comparison
+    const mcpUser = await User.findOne({ username: 'mcp_user' });
+    const mcpUserId = mcpUser ? mcpUser._id.toString() : null;
+
     // Enhance folders with recursive size and file counts
     const enhancedFolders = [];
     for (const folder of folders) {
@@ -107,6 +111,7 @@ const getFolderContents = async (req, res) => {
         name: folder.name,
         parent: folder.parent,
         owner: folder.owner,
+        ownerUsername: mcpUserId && folder.owner.toString() === mcpUserId ? 'mcp_user' : null,
         createdAt: folder.createdAt,
         updatedAt: folder.updatedAt,
         size,
@@ -116,8 +121,14 @@ const getFolderContents = async (req, res) => {
     // Get images in this directory
     // Project only necessary fields (exclude binary data to speed up listings!)
     const images = await Image.find({ parent: folderId, owner: req.user._id })
-      .select('name size contentType createdAt updatedAt')
+      .select('name size contentType createdAt updatedAt owner')
       .sort({ createdAt: -1 });
+
+    // Add ownerUsername to images
+    const imagesWithOwner = images.map(img => ({
+      ...img.toObject(),
+      ownerUsername: mcpUserId && img.owner.toString() === mcpUserId ? 'mcp_user' : null,
+    }));
 
     // Calculate current folder's total size
     let currentFolderSize = 0;
@@ -144,7 +155,7 @@ const getFolderContents = async (req, res) => {
       } : { _id: 'root', name: 'All Files', size: currentFolderSize },
       breadcrumbs,
       folders: enhancedFolders,
-      images,
+      images: imagesWithOwner,
     });
   } catch (error) {
     console.error('Get Folder Contents Error:', error);
