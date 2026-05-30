@@ -365,8 +365,13 @@ The `mongodb-memory-server` package spins up a virtual MongoDB instance if no lo
 
 ### Application (Web UI)
 
+| Field | Value |
+|---|---|
+| Username / Email | `Admin` or `admin@dobbydrive.com` |
+| Password | `admin123` |
+
 > [!NOTE]
-> Sign up with your own account at `/signup`. No pre-seeded credentials are required.
+> You can log in using the pre-seeded credentials above, or create a brand new account instantly at `/signup`.
 
 ### MCP Dedicated User (AI Account)
 
