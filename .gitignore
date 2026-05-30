@@ -47,9 +47,3 @@ mcp-upload-short.mjs
 # Temporary JSON files created by scripts
 temp_*.json
 mcp_*.json
-
-# Local directories with local files
-MCP/
-# Optional MCP helper scripts (not needed for core app)
-screenshot*.mjs
-mcp-*.mjs
